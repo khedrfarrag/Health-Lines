@@ -454,7 +454,7 @@ export const CHATBOT_KNOWLEDGE_AR = [
     ],
     answer: `أهلاً وسهلاً بكِ في مركز خطوط الصحة للسيدات بجدة 🌸
 
-أنا د. لين، مساعدتكِ الذكية المتواجدة على مدار الساعة للإجابة على كل استفساراتكِ ومساعدتكِ في:
+أنا المساعد الذكي لمركز خطوط الصحة، متواجد المتواجدة على مدار الساعة للإجابة على كل استفساراتكِ ومساعدتكِ في:
 • جلسات العلاج الطبيعي وتأهيل الظهر والمفاصل والرقبة
 • نحت القوام وشد الجلد وجهاز فيلاشيب III
 • جلسات المساج والتصريف اللمفاوي بعد عمليات الشفط والشد
@@ -660,13 +660,13 @@ Convenient dedicated parking surrounds the business center.
     title: "Welcome to Health Lines Center for Women",
     keywords: ["hello", "hi", "hey", "welcome", "good morning", "good evening", "how are you"],
     questions: [
-      "Hello Dr. Leen",
+      "Hello Health Lines",
       "Good morning",
       "I need some help"
     ],
     answer: `Welcome to Health Lines Center for Women in Jeddah 🌸
 
-I am Dr. Leen, your intelligent clinic assistant available 24/7. I can guide you through:
+I am the Health Lines smart clinical assistant available 24/7. I can guide you through:
 • Physical therapy & spine care
 • VelaShape III body contouring & cellulite care
 • Post-operative lymphatic drainage

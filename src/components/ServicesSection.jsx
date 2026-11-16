@@ -130,7 +130,7 @@ function ServicesSection({ lang, t, onOpenBooking }) {
               <span>{isAr ? 'خدماتنا العلاجية والتأهيلية' : 'Our Clinical Services'}</span>
             </div>
             <h2 className="font-editorial text-3xl sm:text-5xl font-normal text-[#170a24] dark:text-white leading-[1.25] tracking-tight">
-              {isAr ? 'رعاية متخصصة لكل مرحلة' : 'Specialized Care for Every Stage'}
+              {isAr ? 'خدماتنا العلاجية والتأهيلية' : 'Our Clinical & Rehabilitation Services'}
             </h2>
           </div>
           <p className="max-w-md text-sm sm:text-base text-[#503f63] dark:text-slate-300 leading-relaxed">

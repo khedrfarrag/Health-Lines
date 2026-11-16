@@ -19,10 +19,11 @@ function MorphoHeader({ lang, setLang, t, activeChapter, onOpenBooking }) {
 
   const isAr = lang === 'ar';
 
-  // 5 clean navigation items including 'تواصل معنا'
+  // 6 clean navigation items including 'من نحن' and 'تواصل معنا'
   const navItems = [
     { id: 'hero', label: isAr ? 'الرئيسية' : 'Home', targetId: 'hero' },
-    { id: 'services', label: isAr ? 'خدماتنا' : 'Services', targetId: 'services' },
+    { id: 'about', label: isAr ? 'من نحن' : 'About Us', targetId: 'about' },
+    { id: 'services', label: isAr ? 'خدماتنا' : 'Services', targetId: 'services-grid' },
     { id: 'sessions', label: isAr ? 'جلساتنا' : 'Sessions', targetId: 'sessions' },
     { id: 'why', label: isAr ? 'لماذا نحن' : 'Why Us', targetId: 'why' },
     { id: 'contact', label: isAr ? 'تواصل معنا' : 'Contact Us', targetId: 'contact' },

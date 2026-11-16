@@ -6,27 +6,27 @@ function IntroSection({ lang, t, onOpenBooking }) {
   const ArrowIcon = isAr ? ArrowLeft : ArrowRight;
 
   return (
-    <section id="services" className="py-16 sm:py-24 border-b border-[#9d237a]/10 dark:border-white/10 relative overflow-hidden">
+    <section id="about" className="py-16 sm:py-24 border-b border-[#9d237a]/10 dark:border-white/10 relative overflow-hidden">
       <div className="shell">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Column 1: Title & Overline */}
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#629131]/12 dark:bg-lime-400/15 border border-[#629131]/25 text-xs font-semibold text-[#355e0d] dark:text-lime-300 mb-4">
               <Stethoscope className="w-3.5 h-3.5" />
-              <span>{isAr ? 'الرعاية تبدأ بالفهم' : 'Care Begins With Understanding'}</span>
+              <span>{isAr ? 'من نحن | مركز خطوط الصحة للعلاج الطبيعي' : 'About Us | Health Lines Physical Therapy'}</span>
             </div>
             <h2 className="font-editorial text-3xl sm:text-5xl lg:text-5xl font-normal text-[#170a24] dark:text-white leading-[1.25] tracking-tight">
               {isAr ? (
                 <>
-                  جلسة واحدة بتفاصيل
+                  نحن مركز خطوط الصحة
                   <br />
-                  <span className="text-[#861365] dark:text-fuchsia-300">تصنع فارقًا حقيقيًا</span>
+                  <span className="text-[#861365] dark:text-fuchsia-300">للعلاج الطبيعي والتأهيل النسائي بجدة</span>
                 </>
               ) : (
                 <>
-                  A Single Detail-Driven Session
+                  Health Lines Center
                   <br />
-                  <span className="text-[#861365] dark:text-fuchsia-300">That Creates Real Change</span>
+                  <span className="text-[#861365] dark:text-fuchsia-300">Women’s Physical Therapy & Rehabilitation</span>
                 </>
               )}
             </h2>
@@ -36,8 +36,8 @@ function IntroSection({ lang, t, onOpenBooking }) {
           <div className="flex flex-col items-start gap-5">
             <p className="text-base sm:text-lg text-[#3b2a4c] dark:text-slate-200 leading-relaxed font-medium">
               {isAr
-                ? 'لا نقدم تمارين عامة أو حلولاً سطحية. نبدأ بفهم الحركة ومصدر الألم وأسلوب الحياة، ثم نبني برنامجاً واقعياً مدروساً يساعد جسدك على التعافي واستعادة التوازن بثقة تامة.'
-                : "We don't prescribe generic exercises. We begin by analyzing biomechanics, pain origins, and daily posture, crafting an individualized protocol that guides you toward effortless, pain-free vitality."}
+                ? 'نحن مركز خطوط الصحة للعلاج الطبيعي، مركز طبي وتأهيلي متخصص للسيدات فقط، يقع في مدينة جدة. نحرص على تقديم خدمات العلاج الطبيعي والتأهيل من خلال الاهتمام بصحة المرأة وراحتها، وتوفير بيئة نسائية مريحة وآمنة، مع الحرص على تقديم تجربة علاجية مميزة تلبي احتياجات كل سيدة. هدفنا نكون وجهتك الموثوقة لاستعادة نشاطك، وتحسين جودة حياتك، والاهتمام بصحتك بخطوات مدروسة وعناية تستحقينها. 💗'
+                : 'Health Lines Physical Therapy Center is a specialized medical and rehabilitation sanctuary exclusively for women in Jeddah. We are committed to delivering premier physical therapy and rehabilitation through dedicated attention to women’s health, comfort, and absolute privacy.'}
             </p>
 
             <button

@@ -49,9 +49,9 @@ function HeroChapter({ lang, t, onOpenBooking }) {
     >
       {/* Primary Video Background — Serene, High-Definition, Zero Forced Zoom */}
       <ChapterVideoBackground
-        videoSrc={['/videos/pt-hero-clinic.webm', '/videos/pt-hero-clinic.mp4']}
+        videoSrc={['/videos/jeddah-city.webm', '/videos/pt-hero-clinic.webm', '/videos/pt-hero-clinic.mp4']}
         posterSrc="/assets/hero-sanctuary.jpg"
-        alt="Health Lines Rehabilitation Sanctuary Suite"
+        alt="Health Lines Rehabilitation Sanctuary Suite Jeddah"
         glowClass="bg-[#9d237a]/25 dark:bg-[#9d237a]/35"
         glowSecondaryClass="bg-[#629131]/20 dark:bg-[#84cc16]/25"
         parallaxY={useStaticMobile ? null : bgY}

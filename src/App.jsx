@@ -34,7 +34,8 @@ function MainApp() {
   useEffect(() => {
     const sectionToChapter = {
       hero: 'hero',
-      services: 'services',
+      about: 'about',
+      services: 'about',
       'services-grid': 'services',
       sessions: 'sessions',
       why: 'why',
@@ -43,7 +44,7 @@ function MainApp() {
       contact: 'why',
     };
 
-    const sectionIds = ['hero', 'services', 'services-grid', 'sessions', 'why', 'process', 'faq', 'contact'];
+    const sectionIds = ['hero', 'about', 'services', 'services-grid', 'sessions', 'why', 'process', 'faq', 'contact'];
 
     const elements = sectionIds
       .map((id) => document.getElementById(id))

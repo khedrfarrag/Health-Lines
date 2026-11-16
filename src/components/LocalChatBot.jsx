@@ -33,7 +33,7 @@ function LocalChatBot({ lang = 'ar' }) {
       title: isAr ? 'أهلاً بكِ في مركز خطوط الصحة 🌸' : 'Welcome to Health Lines Center 🌸',
       text: isAr
         ? `أهلاً وسهلاً بكِ في مركز خطوط الصحة للسيدات بجدة 🌸
-أنا د. لين، مساعدتكِ الطبية الذكية. 
+أنا المساعد الطبي الذكي لمركز خطوط الصحة. 
 
 يسعدني الرد الفوري على كل استفساراتكِ حول:
 • جلسات العلاج الطبيعي وآلام الظهر والعمود الفقري والمفاصل
@@ -44,7 +44,7 @@ function LocalChatBot({ lang = 'ar' }) {
 
 تفضلي بكتابة استفساركِ أو اختاري من الموضوعات المقترحة أدناه:`
         : `Welcome to Health Lines Center for Women in Jeddah 🌸
-I am Dr. Leen, your smart clinical assistant.
+I am Health Lines AI Medical Assistant.
 
 I am here 24/7 to answer your questions regarding:
 • Physical therapy for spine, neck & joint rehabilitation
@@ -206,7 +206,7 @@ Feel free to ask any question or tap a suggested topic below:`,
             <div className="flex flex-col text-right rtl:text-left">
               <div className="flex items-center gap-1.5 justify-end rtl:justify-start">
                 <span className="text-xs font-semibold tracking-wide text-[#1f122b] dark:text-white group-hover/pill:text-[#9d237a] dark:group-hover/pill:text-lime-300 transition-colors">
-                  {isAr ? 'استشيري د. لين' : 'Ask Dr. Leen'}
+                  {isAr ? 'المساعد الطبي الذكي' : 'Health Lines AI'}
                 </span>
                 <Sparkles className="w-3.5 h-3.5 text-[#629131] dark:text-lime-400 animate-pulse" />
               </div>
@@ -248,7 +248,7 @@ Feel free to ask any question or tap a suggested topic below:`,
                   <Stethoscope className="w-3.5 h-3.5 text-white" />
                 </div>
                 <h4 className="text-xs font-semibold text-[#4d7c1b] dark:text-lime-300">
-                  {isAr ? 'د. لين ترحب بكِ 🌸' : 'Dr. Leen Welcomes You 🌸'}
+                  {isAr ? 'مركز خطوط الصحة يرحب بكِ 🌸' : 'Health Lines Center Welcomes You 🌸'}
                 </h4>
               </div>
 
@@ -333,7 +333,7 @@ Feel free to ask any question or tap a suggested topic below:`,
                 <div>
                   <div className="flex items-center gap-1.5">
                     <h3 className="font-semibold text-[#1f122b] dark:text-white text-sm">
-                      {isAr ? 'د. لين · المساعد الطبي الذكي' : 'Dr. Leen · Smart Clinic AI'}
+                      {isAr ? 'مركز خطوط الصحة · المساعد الطبي الذكي' : 'Health Lines · Smart Clinic AI'}
                     </h3>
                     <ShieldCheck className="w-4 h-4 text-[#4d7c1b] dark:text-lime-400" />
                   </div>
@@ -456,7 +456,7 @@ Feel free to ask any question or tap a suggested topic below:`,
                     <span className="w-2 h-2 rounded-full bg-[#9d237a] animate-bounce delay-300" />
                   </div>
                   <span className="text-[11px] font-mono text-[#4d7c1b] dark:text-lime-300/90">
-                    {isAr ? 'د. لين تبحث في السجلات الطبية...' : 'Dr. Leen is consulting clinical data...'}
+                    {isAr ? 'مركز خطوط الصحة يبحث في السجلات الطبية...' : 'Health Lines is consulting clinical data...'}
                   </span>
                 </div>
               )}
