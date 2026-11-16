@@ -4,7 +4,7 @@ import { Calendar, Menu, X, Globe, Sun, Moon, Phone, MessageCircle } from 'lucid
 import { useClinicContext } from '../context/useClinicContext';
 
 function MorphoHeader({ lang, setLang, t, activeChapter, onOpenBooking }) {
-  const { theme, toggleTheme } = useClinicContext();
+  const { theme, toggleTheme, setActiveChapter } = useClinicContext();
   const isDark = theme === 'dark';
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -69,6 +69,7 @@ function MorphoHeader({ lang, setLang, t, activeChapter, onOpenBooking }) {
                 <a
                   key={item.id}
                   href={`#${item.targetId}`}
+                  onClick={() => setActiveChapter(item.id)}
                   className={`relative py-1 px-1 transition-colors duration-200 ${
                     isActive
                       ? 'text-[#9d237a] dark:text-white font-bold'
@@ -192,7 +193,10 @@ function MorphoHeader({ lang, setLang, t, activeChapter, onOpenBooking }) {
                     <a
                       key={item.id}
                       href={`#${item.targetId}`}
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={() => {
+                        setActiveChapter(item.id);
+                        setMobileMenuOpen(false);
+                      }}
                       className={`py-3.5 text-base font-bold flex items-center justify-between transition-colors ${
                         isActive
                           ? 'text-[#9d237a] dark:text-fuchsia-300 font-extrabold'
