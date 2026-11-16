@@ -30,6 +30,7 @@ function MorphoHeader({ lang, setLang, t, activeChapter, onOpenBooking }) {
   ];
 
   return (
+    <>
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
@@ -140,7 +141,7 @@ function MorphoHeader({ lang, setLang, t, activeChapter, onOpenBooking }) {
           {/* Mobile Menu Toggle Button */}
           <button
             type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
             className="lg:hidden p-2 rounded-full bg-black/[0.04] dark:bg-white/[0.08] border border-black/10 dark:border-white/15 text-[#1f122b] dark:text-white hover:text-[#9d237a] cursor-pointer shrink-0"
             aria-label="Toggle mobile menu"
           >
@@ -148,8 +149,9 @@ function MorphoHeader({ lang, setLang, t, activeChapter, onOpenBooking }) {
           </button>
         </div>
       </div>
+    </header>
 
-      {/* Lightweight, High-Performance Mobile Drawer Navigation */}
+    {/* Lightweight, High-Performance Mobile Drawer Navigation */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -157,7 +159,7 @@ function MorphoHeader({ lang, setLang, t, activeChapter, onOpenBooking }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="fixed inset-x-0 top-[56px] sm:top-[64px] bottom-0 z-40 bg-white/98 dark:bg-[#10051a]/98 p-5 sm:p-6 flex flex-col justify-between overflow-y-auto border-t border-[#9d237a]/15 dark:border-white/10 shadow-2xl lg:hidden transform-gpu"
+            className="fixed inset-x-0 top-[56px] sm:top-[64px] bottom-0 z-[60] bg-white dark:bg-[#10051a] p-5 sm:p-6 flex flex-col justify-between overflow-y-auto border-t border-[#9d237a]/15 dark:border-white/10 shadow-2xl lg:hidden"
           >
             <div>
               {/* Preferences Bar: Theme & Language (Clean & accessible inside drawer) */}
@@ -246,7 +248,7 @@ function MorphoHeader({ lang, setLang, t, activeChapter, onOpenBooking }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }
 
