@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
-import { Phone, MessageCircle, Sparkles } from 'lucide-react';
+import { Phone, Sparkles } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 function BookingBandSection({ lang, t }) {
   const isAr = lang === 'ar' || t?.langCode === 'العربية';
@@ -59,7 +60,7 @@ function BookingBandSection({ lang, t }) {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-sm sm:text-base shadow-lg shadow-[#25D366]/25 transition-transform hover:-translate-y-0.5 active:translate-y-0"
             >
-              <MessageCircle className="w-5 h-5 text-white" />
+              <WhatsAppIcon className="w-5 h-5 text-white" />
               <span>{isAr ? 'ابدأ محادثة واتساب' : 'Chat on WhatsApp'}</span>
             </a>
           </div>

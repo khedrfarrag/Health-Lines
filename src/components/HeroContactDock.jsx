@@ -1,6 +1,7 @@
 import React, { memo, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Phone, MapPin, Mail, MessageCircle } from 'lucide-react';
+import { Calendar, Phone, MapPin, Mail } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import InstagramIcon from './InstagramIcon';
 import { siteConfig } from '../config/siteConfig';
 
@@ -30,7 +31,7 @@ function HeroContactDock({ t, lang = 'ar', onOpenBooking }) {
         id: 'whatsapp',
         label: dock.whatsapp || (isAr ? 'واتساب' : 'WhatsApp'),
         ariaLabel: `${dock.whatsapp || 'WhatsApp'} — ${siteConfig.contact.displayWhatsapp}`,
-        icon: MessageCircle,
+        icon: WhatsAppIcon,
         href: siteConfig.buildWhatsAppUrl(whatsappText),
         external: true,
         accentClass:

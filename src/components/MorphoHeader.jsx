@@ -1,6 +1,7 @@
 import React, { memo, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Menu, X, Globe, Sun, Moon, Phone, MessageCircle } from 'lucide-react';
+import { Calendar, Menu, X, Globe, Sun, Moon, Phone } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import { useClinicContext } from '../context/useClinicContext';
 
 function MorphoHeader({ lang, setLang, t, activeChapter, onOpenBooking }) {
@@ -101,7 +102,7 @@ function MorphoHeader({ lang, setLang, t, activeChapter, onOpenBooking }) {
             className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#25D366]/12 dark:bg-[#25D366]/18 hover:bg-[#25D366]/25 border border-[#25D366]/35 text-[#15803d] dark:text-[#4ade80] hover:text-[#0f5132] dark:hover:text-white text-xs font-bold transition-all shadow-sm"
             aria-label="WhatsApp"
           >
-            <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
+            <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
             <span>{isAr ? 'واتساب' : 'WhatsApp'}</span>
             <span className="text-[10px] font-mono opacity-70">↗</span>
           </a>
@@ -233,7 +234,7 @@ function MorphoHeader({ lang, setLang, t, activeChapter, onOpenBooking }) {
                 rel="noopener noreferrer"
                 className="w-full py-2.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-center text-sm flex items-center justify-center gap-2 shadow-sm transition-colors"
               >
-                <MessageCircle className="w-4 h-4 text-white" />
+                <WhatsAppIcon className="w-4 h-4 text-white" />
                 <span>{isAr ? 'محادثة عبر واتساب' : 'Chat on WhatsApp'}</span>
               </a>
 

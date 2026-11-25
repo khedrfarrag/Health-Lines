@@ -1,7 +1,8 @@
 import React, { memo, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, ArrowRight, MessageCircle, Sparkles, Phone, Star } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Sparkles, Phone, Star } from 'lucide-react';
 import ChapterVideoBackground from './ChapterVideoBackground';
+import WhatsAppIcon from './WhatsAppIcon';
 import { useDeviceProfile } from '../hooks/useDeviceProfile';
 
 const EXPO_OUT = [0.16, 1, 0.3, 1];
@@ -112,14 +113,14 @@ function HeroChapter({ lang, t, onOpenBooking }) {
           </h1>
 
           {/* Subtitle / Lead Paragraph */}
-          <p className="max-w-[34ch] sm:max-w-2xl text-[13.5px] sm:text-lg md:text-xl text-white/85 leading-[1.75] sm:leading-relaxed font-normal mb-6 sm:mb-10 px-2 sm:px-3 drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]">
+          <p className="w-full max-w-none sm:max-w-2xl text-[14.5px] sm:text-lg md:text-xl text-white/90 leading-[1.7] sm:leading-relaxed font-normal mb-6 sm:mb-10 px-0 sm:px-3 drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]">
             {isAr
               ? 'توازن. خفة. علم. تجدد. جلسات علاج طبيعي وتأهيل متقدم ونحت قوام في جدة، بخطة فردية بإشراف أخصائيات معتمدات في أجنحة خاصة تمنحكِ الراحة التامة.'
               : 'Balance. Lightness. Science. Renewal. Advanced physical therapy, rehabilitation, and body sculpting in Jeddah, tailored by certified specialists in completely private suites.'}
           </p>
 
           {/* World-Class Hero Action Buttons */}
-          <div className="flex flex-row items-center justify-center gap-2.5 sm:gap-4 w-full max-w-sm sm:max-w-none mb-6 sm:mb-11">
+          <div className="flex flex-row items-center justify-center gap-2.5 sm:gap-4 w-full sm:w-auto mb-6 sm:mb-11">
             {/* Primary Action Button — Rich Brand Gradient with Light Shimmer & Glow */}
             <button
               type="button"
@@ -140,8 +141,8 @@ function HeroChapter({ lang, t, onOpenBooking }) {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 sm:gap-2.5 px-4 py-3.5 sm:px-8 sm:py-4.5 rounded-full bg-black/30 hover:bg-black/45 border border-white/25 text-white font-semibold text-xs sm:text-base backdrop-blur-2xl shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 whitespace-nowrap"
             >
-              <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-sm">
-                <MessageCircle className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-white" />
+              <div className="w-5 h-5 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-sm">
+                <WhatsAppIcon className="w-3.5 h-3.5 text-white" />
               </div>
               <span className="sm:hidden">{isAr ? 'واتساب' : 'WhatsApp'}</span>
               <span className="hidden sm:inline">{isAr ? 'تواصل عبر واتساب' : 'Chat on WhatsApp'}</span>
