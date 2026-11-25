@@ -43,6 +43,7 @@ function ChapterVideoBackground({
   const [shouldMountVideo, setShouldMountVideo] = useState(
     Boolean(sequence) && isPriorityEffective && !shouldDisableVideo
   );
+  const isVideoMounted = Boolean(sequence) && !shouldDisableVideo && (isPriorityEffective || shouldMountVideo);
   const [isVideo1Loaded, setIsVideo1Loaded] = useState(false);
   const [isVideo2Loaded, setIsVideo2Loaded] = useState(false);
 
@@ -59,9 +60,9 @@ function ChapterVideoBackground({
     }
   }, [hasDualVideo, onSequenceChange]);
 
-  // Release video decoders when completely scrolled off-screen
+  // Release non-priority video decoders when scrolled far off-screen
   useEffect(() => {
-    if (!sequence || shouldDisableVideo) return undefined;
+    if (!sequence || shouldDisableVideo || isPriorityEffective) return undefined;
 
     const container = containerRef.current;
     if (!container) return undefined;
@@ -74,18 +75,8 @@ function ChapterVideoBackground({
           } else {
             const v1 = video1Ref.current;
             const v2 = video2Ref.current;
-            if (v1) {
-              v1.pause();
-              v1.removeAttribute('src');
-              v1.querySelectorAll('source').forEach((s) => s.removeAttribute('src'));
-              v1.load();
-            }
-            if (v2) {
-              v2.pause();
-              v2.removeAttribute('src');
-              v2.querySelectorAll('source').forEach((s) => s.removeAttribute('src'));
-              v2.load();
-            }
+            if (v1) v1.pause();
+            if (v2) v2.pause();
             setIsVideo1Loaded(false);
             setIsVideo2Loaded(false);
             setShouldMountVideo(false);
@@ -94,18 +85,18 @@ function ChapterVideoBackground({
       },
       {
         root: null,
-        rootMargin: isMobile ? '0px' : retentionMargin,
-        threshold: isMobile ? 0.25 : 0,
+        rootMargin: isMobile ? '150px 0px 150px 0px' : retentionMargin,
+        threshold: 0,
       }
     );
 
     retentionObserver.observe(container);
     return () => retentionObserver.disconnect();
-  }, [sequence, shouldDisableVideo, isMobile, retentionMargin]);
+  }, [sequence, shouldDisableVideo, isPriorityEffective, isMobile, retentionMargin]);
 
   // Playback observer & timer for dual video transition
   useEffect(() => {
-    if (!sequence || !shouldMountVideo || shouldDisableVideo) return undefined;
+    if (!sequence || !isVideoMounted || shouldDisableVideo) return undefined;
 
     const container = containerRef.current;
     if (!container) return undefined;
@@ -123,17 +114,42 @@ function ChapterVideoBackground({
       if (isSubscribed) setIsVideo2Loaded(true);
     };
 
+    const safePlay = (videoEl) => {
+      if (!videoEl) return;
+      videoEl.muted = true;
+      const playPromise = videoEl.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {
+          // On iOS Low Power Mode or strict mobile browsers, retry play on first user gesture
+          const resumeOnTouch = () => {
+            if (isSubscribed && videoEl) {
+              videoEl.muted = true;
+              videoEl.play().catch(() => {});
+            }
+            window.removeEventListener('touchstart', resumeOnTouch);
+            window.removeEventListener('pointerdown', resumeOnTouch);
+          };
+          window.addEventListener('touchstart', resumeOnTouch, { once: true, passive: true });
+          window.addEventListener('pointerdown', resumeOnTouch, { once: true, passive: true });
+        });
+      }
+    };
+
     if (v1) {
+      v1.muted = true;
       if (v1.readyState >= 2) markV1Ready();
       else {
         v1.addEventListener('loadeddata', markV1Ready);
+        v1.addEventListener('canplay', markV1Ready);
         v1.addEventListener('playing', markV1Ready);
       }
     }
     if (v2) {
+      v2.muted = true;
       if (v2.readyState >= 2) markV2Ready();
       else {
         v2.addEventListener('loadeddata', markV2Ready);
+        v2.addEventListener('canplay', markV2Ready);
         v2.addEventListener('playing', markV2Ready);
       }
     }
@@ -144,9 +160,9 @@ function ChapterVideoBackground({
           if (!isSubscribed) return;
           if (entry.isIntersecting) {
             if (activeVideoIndex === 0 && v1) {
-              v1.play().catch(() => {});
+              safePlay(v1);
             } else if (activeVideoIndex === 1 && v2) {
-              v2.play().catch(() => {});
+              safePlay(v2);
             }
           } else {
             if (v1) v1.pause();
@@ -156,7 +172,7 @@ function ChapterVideoBackground({
       },
       {
         root: null,
-        rootMargin: isMobile ? '0px' : '120px 0px 120px 0px',
+        rootMargin: isMobile ? '40px 0px 40px 0px' : '120px 0px 120px 0px',
         threshold: 0.05,
       }
     );
@@ -179,16 +195,18 @@ function ChapterVideoBackground({
       playbackObserver.disconnect();
       if (v1) {
         v1.removeEventListener('loadeddata', markV1Ready);
+        v1.removeEventListener('canplay', markV1Ready);
         v1.removeEventListener('playing', markV1Ready);
         v1.pause();
       }
       if (v2) {
         v2.removeEventListener('loadeddata', markV2Ready);
+        v2.removeEventListener('canplay', markV2Ready);
         v2.removeEventListener('playing', markV2Ready);
         v2.pause();
       }
     };
-  }, [sequence, shouldMountVideo, shouldDisableVideo, isMobile, activeVideoIndex, hasDualVideo, transitionToNextVideo]);
+  }, [sequence, isVideoMounted, shouldDisableVideo, isMobile, activeVideoIndex, hasDualVideo, transitionToNextVideo]);
 
   const webpSrc = posterSrc
     ? posterSrc.replace(/\.jpg$/i, '.webp').replace(/\.jpeg$/i, '.webp')
@@ -215,19 +233,20 @@ function ChapterVideoBackground({
               decoding="async"
               fetchPriority={isPriorityEffective ? 'high' : 'auto'}
               className={`absolute inset-0 w-full h-full object-cover object-center ${brightness} ${contrast} ${scale} transition-opacity duration-700 ${
-                shouldMountVideo && (isVideo1Loaded || isVideo2Loaded) ? 'opacity-0' : 'opacity-100'
+                isVideoMounted && (isVideo1Loaded || isVideo2Loaded) ? 'opacity-0' : 'opacity-100'
               }`}
             />
           </picture>
         )}
 
         {/* Video 1: Jeddah City / First Clip */}
-        {v1Config && shouldMountVideo && !isWeakOrSaveData && (
+        {v1Config && isVideoMounted && !shouldDisableVideo && (
           <video
             ref={video1Ref}
             poster={posterSrc}
             autoPlay
             muted
+            loop={v1Config.loop ?? !hasDualVideo}
             playsInline
             preload={isPriorityEffective ? 'auto' : 'metadata'}
             aria-hidden="true"
@@ -247,7 +266,7 @@ function ChapterVideoBackground({
         )}
 
         {/* Video 2: Clinic Sanctuary / Second Clip */}
-        {v2Config && shouldMountVideo && !isWeakOrSaveData && (
+        {v2Config && isVideoMounted && !shouldDisableVideo && (
           <video
             ref={video2Ref}
             autoPlay={activeVideoIndex === 1}
@@ -271,10 +290,10 @@ function ChapterVideoBackground({
         )}
 
         {/* Multi-layer theme-adaptive scrim ensuring text legibility over city & clinic media */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#fcf9fc]/50 via-[#fbf3fb]/15 to-[#fcf9fc]/55 dark:from-[#1b0826]/85 dark:via-[#2b0c33]/55 dark:to-[#121c0f]/85 transition-colors duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#160720]/70 via-[#1b0826]/30 to-[#12061c]/85 dark:from-[#160720]/80 dark:via-[#220a2c]/45 dark:to-[#10180d]/90 transition-colors duration-500" />
 
         {/* Soft radial vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(249,240,249,0.25)_95%)] dark:bg-[radial-gradient(ellipse_at_center,transparent_30%,#15051f_95%)] opacity-50 dark:opacity-70" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(16,5,24,0.65)_100%)] opacity-75" />
 
         {/* Atmospheric Medical Color Glows */}
         <div className={`atmosphere-glow w-[260px] h-[260px] sm:w-[480px] sm:h-[480px] -top-24 -left-24 ${glowClass}`} />
